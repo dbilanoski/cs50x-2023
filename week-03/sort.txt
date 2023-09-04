@@ -1,0 +1,13 @@
+# LAB 3 Answaers
+
+sort1 uses: Bubble sort
+
+How do you know?: Is's slightly more efficient on sorted files so in comparison to sort3 which is slow in general so this should be bubble.
+
+sort2 uses: Merge sort
+
+How do you know?: Most efficient overall regardles of the files.
+
+sort3 uses: Selection sort
+
+How do you know?: Slower than sor1 for sorted files.                                                                                                                                                       

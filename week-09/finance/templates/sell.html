@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post">
+        <!-- For each stock symbol will need an option under select input tag -->
+        <div class="mb-3">
+            <select class="form-select" name="symbol">
+                <option selected>Select stock to sell</option>
+                {% for stock in stocks %}
+                    <!-- For each symbol generate one of this-->
+                    <option value="{{stock.symbol}}">{{stock.symbol}}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="shares" placeholder="Shares" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Sell</button>
+    </form>
+{% endblock %}

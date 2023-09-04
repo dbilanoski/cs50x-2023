@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Settings
+{% endblock %}
+
+{% block main %}
+    <section class="container">
+        <h1 class="display-1">{{ user_name }}'s Settings</h1>
+        <div class="row allign-left">
+            <h3>{{ user_name }}'s cash: {{ "$%.2f"|format(user_money) }}</h3>
+            <form action="/settings" method="post">
+                <input name="id" type="hidden" value="cash_deposit">
+                <input autocomplete="off" class="form-control inline-input" name="cash" placeholder="Cash amount" type="number">
+                <button class="btn btn-primary" type="submit" name="cash_deposit">Deposit Cash</button>
+            </form>
+        </div>
+        <div class="row allign-left">
+            <h3>{{ user_name }}'s Personal Data</h3>
+            <form action="/settings" method="post">
+                <input name="id" type="hidden" value="change_password">
+                <button class="btn btn-primary" type="submit" name="change_password">Change Password</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

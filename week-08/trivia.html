@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <!-- <link href="styles.css" rel="stylesheet"> -->
+        <title>Trivia!</title>
+
+        <!--  CSS I copied here so it's single file -->
+        <style> 
+            body {
+            background-color: #F4F4F4;
+            color: #212529;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            margin: 0;
+            text-align: left;
+        }
+
+        .container {
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .header {
+            background-color: #477bff;
+            color: #fff;
+            margin-bottom: 2rem;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .section {
+            padding: 0.5rem 2rem 1rem 2rem;
+        }
+
+        .section:hover {
+            background-color: #f5f5f5;
+            transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+        }
+
+        button, input[type="submit"] {
+            background-color: #d9edff;
+            border: 1px solid transparent;
+            border-radius: 0.25rem;
+            font-size: 0.95rem;
+            font-weight: 400;
+            line-height: 1.5;
+            padding: 0.375rem 0.75rem;
+            text-align: center;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            vertical-align: middle;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+
+        input[type="number"] {
+            line-height: 1.8;
+            width: 25%;
+            margin-right: 20px;
+        }
+
+        input[type="number"]:hover {
+            background-color: #f5f5f5;
+            transition: color 2s ease-in-out, background-color 0.15s ease-in-out;
+        }
+
+        .red {
+            background-color: red;
+            color: white;
+        }
+
+        .green {
+            background-color: green;
+            color: white;
+        }
+
+        .message {
+            margin-top: -15px;
+            margin-bottom: 10px;
+            padding: 0.375rem 0.75rem;
+        }
+                
+        </style>
+
+        <script>
+            // TODO: Add code to check answers to questions
+            // Wait for DOM to load
+            window.addEventListener('DOMContentLoaded', function(){
+
+                // Helper function to clear classes
+                function cleanClasses(elem){
+                    // Get all elements with tag same as provided element
+                    items = document.querySelectorAll(elem.tagName);
+                    // For each, remove both coloring classes
+                    items.forEach(
+                        function(current){
+                            current.classList.remove("red");
+                            current.classList.remove("green");
+
+                            // In case it's the answer block, clear text too
+                            if (current.classList.contains("message")) {
+                                current.innerHTML="";
+                            }
+                    });
+                }
+                // Helper function to color and print answers
+                function correctAnswer(button, color){
+
+                    // Get message block (parent's previous sibling)
+                    let message_block = button.parentNode.previousElementSibling;
+                    // Clean classes on buttons and answers
+                    cleanClasses(button);
+                    cleanClasses(message_block);
+                    message_block.InnerHTML = "";
+
+                    // Apply appropriate colors
+                    button.classList.add(color);
+                    message_block.classList.add(color);
+
+                    // Provide appropriate message
+                    if (color == "green"){
+                        message_block.innerHTML = "Correct!";
+                    } else {
+                        message_block.innerHTML = "Incorrect!";
+                    };
+                }
+
+                // Main logic, check for button clicks
+                // Get container div in which we'll be listening for clicks
+                container = document.querySelector('.container');
+                // Set event listener
+                container.addEventListener("click", function(){
+
+                    // Check if button with type different then submit to get first question answers buttons
+                    if (event.target.tagName == "BUTTON" && event.target.type != "submit") {
+                        // Get value
+                        // If 5 (correct answer), trigger rendering function for correct answer
+                        // If different, trigger rendering function for wrong answer
+                        btn_value = event.target.innerText;
+                        if (btn_value == 5) {
+                            correctAnswer(event.target, "green");
+                        } else {
+                            correctAnswer(event.target, "red");
+                        }
+                    // Check if button with type submit to get second question answers buttons
+                    } else if (event.target.tagName == "BUTTON" && event.target.type == "submit") {
+                        // Get value. If correct (21), render green, else render red
+                        input_value = event.target.previousElementSibling.value;
+                        if (input_value == 21) {
+                            correctAnswer(event.target, "green");
+                        } else {
+                            correctAnswer(event.target, "red");
+                        }
+                    }
+
+                })
+            });
+
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Trivia!</h1>
+        </div>
+
+        <div class="container">
+            <div class="section">
+                <h2>Part 1: Multiple Choice </h2>
+                <hr>
+                <!-- TODO: Add multiple choice question here -->
+                <h3> What is the largest number here?</h3>
+                <div class="message"></div>
+                <div>
+                    <button type="button">1</button>
+                    <button type="button">2</button>
+                    <button type="button">3</button>
+                    <button type="button">4</button>
+                    <button type="button">5</button>
+                </div>
+
+            </div>
+
+            <div class="section">
+                <h2>Part 2: Free Response</h2>
+                <hr>
+                <!-- TODO: Add free response question here -->
+                <h3> What is 3 times 7?</h3>
+                <div class="message"></div>
+                <div>
+                    <input type="number" placeholder="Answer here"></button>
+                    <button type="submit">Submit</button>
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>

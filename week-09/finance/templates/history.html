@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <section class="container">
+        <h1 class="display-1">{{ user_name }}'s Transaction History</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Transaction type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Stock</th>
+                        <th scope="col">Shares</th>
+                        <th scope="col">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- For each stock I'll need one of these -->
+                    {% for stock in user_purchases %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ stock.type }}</td>
+                            <td>{{ stock.date }}</td>
+                            <td>{{ stock.symbol }}</td>
+                            <td>{{ stock.shares }}</td>
+                            <td>{{ stock.price | usd }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+    <section class="container">
+        <h1 class="display-1">{{ user_name }}'s Portfolio</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Symbol</th>
+                        <th scope="col">Shares</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- For each stock I'll need one of these -->
+                    {% for stock in user_purchases %}
+                        <tr>
+                            <th scope="row">{{ loop.index }}</th>
+                            <td>{{ stock.symbol }}</td>
+                            <td>{{ stock.shares }}</td>
+                            <td>{{ stock.price | usd }}</td>
+                            <td class="portfolio-totals">{{ stock.total | usd }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <!-- Then I need totals, will do table footer for this -->
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <th scope="col">Cash:</th>
+                        <td id="portfolio-cash">{{ user_money | usd }}</td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <th scope="col">Total:</th>
+                        <td>$<span id="portfolio-total"></span></td>
+                    </tr>
+                  </tfoot>
+              </table>
+        </div>
+    </section>
+{% endblock %}

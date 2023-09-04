@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <section class="container">
+        <h1 class="display-1">Quoted stock data</h1>
+        <div class="row allign-left">
+            <h3 class="display-4">Symbol: {{ symbol }}</h3>
+            <h3 class="display-4 ">Price: <span class="color-accent">{{ price | usd }}</span></h3>
+        </div>
+    </section>
+{% endblock %}
