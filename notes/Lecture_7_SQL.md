@@ -7,7 +7,7 @@ Structure Query Language - language for crud actions on a databases
 
 Csv file holding some data.
 
-Example: handlin csv with python
+Example: handling csv with python
 
 ```python
 import csv
